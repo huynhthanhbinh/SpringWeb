@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="XmlConfig:war">
+    <output-path>$PROJECT_DIR$/XmlConfig/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>XmlConfig</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="BHT_SpringMVC.war">
+      <element id="artifact" artifact-name="XmlConfig:war exploded" />
+    </root>
+  </artifact>
+</component>

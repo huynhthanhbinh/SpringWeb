@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="AnnotationConfig:war">
+    <output-path>$PROJECT_DIR$/AnnotationConfig/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>AnnotationConfig</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="BHT_SpringMVC.war">
+      <element id="artifact" artifact-name="AnnotationConfig:war exploded" />
+    </root>
+  </artifact>
+</component>
