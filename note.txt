@@ -1,0 +1,76 @@
+0. Create Maven Project as maven-archetype-webapp
+    0.0 - Should use IntelliJ Ultimate version
+    0.1 - Open IntelliJ
+    0.2 - New Project --> Choose Maven
+    0.3 - Choose maven-archetype-webapp
+    0.4 - Fill all fields
+
+1. Configure pom.xml
+    1.1 - <properties> -> ${property_name} in version of dependency
+    1.2 - <dependencies>
+        1.2.0 - spring-core
+        1.2.1 - spring-webmvc
+        1.2.2 - spring-beans
+        1.2.3 - spring-context
+        1.2.4 - servlet-api
+        1.2.5 - jstl
+        1.2.6 - jsp-api
+        1.2.7 - log4j
+        1.2.8 - mssql-jdbc
+
+(Remind:
+    /webapp folder is the root directory of web application !!!
+    /WEB-INF is the folder auto generated !!!)
+
+2. Delete /WEB-INF/index.jsp automatically created on initialization !
+
+3. Configure /WEB-INF/web.xml
+    3.0 - Open-tag : <web-app> --> configure namespace (xmlns, xmlns:xsi, xsi...)
+    3.1 - Configure <display-name>
+    3.2 - Setup <servlet>
+        3.2.1 - <servlet-name> [name]
+        3.2.2 - <servlet-class> org.springframework.web.servlet.DispatcherServlet
+        3.2.3 - <init-param>
+            3.2.3.1 - <param-name> contextConfigLocation
+            3.2.3.2 - <param-value> /WEB-INF/spring-servlet.xml
+        3.2.4 - <load-on-startup> 1 </load-on-startup>
+    3.3 - Configure <servlet-mapping>
+        3.3.1 - <servlet-name> [name] (the same as configure above)
+        3.3.2 - <url-pattern> / <url-pattern>
+
+4. Create context configuration file
+    4.1 - Create /WEB-INF/spring-servlet.xml
+    4.2 - Configure file spring-servlet.xml
+        4.2.1 - Configure <beans> and namespace
+        4.2.2 - <context:component-scan base-package="[package_name]"/>
+        4.2.3 - <mvc:annotation-driven/>
+        4.2.4 - Configure for views, eg.
+
+        <!-- /WEB-INF/views/<page_name>.jsp -->
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+            <!-- Directory of views files -->
+            <property name="prefix" value="/WEB-INF/views/"/>
+            <!-- Format of views files : .jsp / .html / ... -->
+            <property name="suffix" value=".jsp"/>
+
+        </bean>
+
+5. Create controller in your predefine package, for eg.
+
+    package bht.springmvc;
+
+    import org.springframework.stereotype.Controller;
+    import org.springframework.ui.ModelMap;
+    import org.springframework.web.bind.annotation.RequestMapping;
+
+    @Controller
+    public class HelloController {
+
+        @RequestMapping("/hello")
+        public String sayHello(ModelMap map) {
+            map.addAttribute("msg", "Richard Huynh");
+            return "Hello "; // a view name hello
+        }
+    }
+
