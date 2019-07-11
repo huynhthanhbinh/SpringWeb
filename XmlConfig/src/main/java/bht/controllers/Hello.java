@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Hello {
@@ -24,7 +25,7 @@ public class Hello {
     //which match this will be implement the view
     //finally the view is return back to the browser
     //user now can see the new view !
-    @RequestMapping("/") //path is /hello
+    @RequestMapping(value = {"/", "/hello"}, method = RequestMethod.GET) //path is /hello
     public String sayHello(ModelMap map) {
         // Set a new Map with key "msg" value "Steven Vu" (obj)
         // Assign this map to the addAttribute method
