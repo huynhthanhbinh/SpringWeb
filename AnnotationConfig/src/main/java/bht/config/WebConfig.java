@@ -1,13 +1,11 @@
 package bht.config;
 
-import bht.models.Order;
-import bht.models.Person;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -19,6 +17,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan("bht.controllers")
+@Import(bht.config.BeanConfig.class)
 public class WebConfig implements WebMvcConfigurer {
 
     // Configure viewResolver for matching view name return by Controller
@@ -43,31 +42,16 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
-    @Bean(name = "person", initMethod = "initPerson", destroyMethod = "destroyPerson")
-    @Scope("prototype")
-    public Person person() {
-        return new Person("Steven", 19);
-    }
+    // Use to read messages properties for messages, logging ...
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource bundleMessageSource =
+                new ReloadableResourceBundleMessageSource();
 
+        // current class path is: src/main/java/ -> go to messages.properties
+        bundleMessageSource.setBasename("classpath:messages");
+        bundleMessageSource.setDefaultEncoding("UTF-8");
 
-    @Bean(name = "person2", initMethod = "initPerson", destroyMethod = "destroyPerson")
-    @Scope("prototype")
-    public Person person2() {
-        return new Person("Richard", 20);
-    }
-
-
-    @Bean("order")
-    @Autowired
-    public Order order(Person person) {
-        return new Order(person);
-    }
-
-
-    @Bean("order2")
-    @Autowired
-    @Qualifier("person2")
-    public Order order2(Person person) {
-        return new Order(person);
+        return bundleMessageSource;
     }
 }

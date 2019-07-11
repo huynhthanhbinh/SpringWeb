@@ -18,6 +18,8 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
+    <import resource="bean.xml"/>
+
     <!-- /WEB-INF/views/<page_name>.jsp -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
@@ -28,28 +30,12 @@
 
     </bean>
 
-    <bean id="person" class="bht.models.Person" scope="prototype"
-          init-method="initPerson" destroy-method="destroyPerson">
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 
-        <constructor-arg name="name" value="Richard"/>
-        <constructor-arg name="age" value="20"/>
-
-        <!-- <property name="name" value="Richard"/> -->
-        <!-- <property name="age" value="20"/> -->
+        <!-- current class path is: src/main/java/ -> go to messages.properties -->
+        <property name="basename" value="classpath:messages"/>
+        <property name="defaultEncoding" value="UTF-8"/>
 
     </bean>
-
-    <!--
-    Autowired Bean
-        1. byName
-        2. byType
-        3. constructor
-        4. autodetect (common/default)
-    -->
-
-    <!-- assign bean person generated above to argument of Order constructor -->
-    <bean id="order" class="bht.models.Order">
-        <constructor-arg type="bht.models.Person" ref="person"/>
-    </bean>
-
 </beans>

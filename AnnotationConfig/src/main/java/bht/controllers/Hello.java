@@ -1,14 +1,19 @@
 package bht.controllers;
 
 import bht.models.Person;
+import bht.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("/bht")
 @Controller
@@ -62,5 +67,57 @@ public class Hello {
         request.setAttribute("person", person);
         request.setAttribute("username", username);
         return "hello"; // viewResolver find view name hello and set model to it
+    }
+
+
+    // ViewResolver to return back a view name addUser !
+    @GetMapping("/user/add")
+    public String addUser(HttpServletRequest request) {
+
+        User user = new User();
+
+        List<String> hobbies = new ArrayList<>();
+        hobbies.add("Coding");
+        hobbies.add("Singing");
+        hobbies.add("Swimming");
+        hobbies.add("Dancing");
+        hobbies.add("Climbing");
+
+//        user.setUsername("huynhthanhbinh");
+//        user.setPassword("0123456789");
+//        user.setId(1653006);
+//        user.setEmail("bht@elca.vn");
+//        user.setHobbies(hobbies);
+//        user.setAcceptAgreement(true);
+
+        request.setAttribute("user", user);
+        request.setAttribute("hobbies", hobbies);
+
+        return "user/add";
+    }
+
+
+    @PostMapping("/user/add")
+    public String viewUser(HttpServletRequest request,
+                           @ModelAttribute("user") @Valid User user,
+                           BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            List<String> hobbies = new ArrayList<>();
+            hobbies.add("Coding");
+            hobbies.add("Singing");
+            hobbies.add("Swimming");
+            hobbies.add("Dancing");
+            hobbies.add("Climbing");
+
+
+            request.setAttribute("user", user);
+            request.setAttribute("hobbies", hobbies);
+
+            return "user/add";
+        }
+
+        request.setAttribute("u", user);
+        return "user/view";
     }
 }
