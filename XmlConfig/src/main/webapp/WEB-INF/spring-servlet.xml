@@ -32,6 +32,22 @@
         <constructor-arg name="name" value="Richard"/>
         <constructor-arg name="age" value="20"/>
 
+        <!-- <property name="name" value="Richard"/> -->
+        <!-- <property name="age" value="20"/> -->
+
+    </bean>
+
+    <!--
+    Autowired Bean
+        1. byName
+        2. byType
+        3. constructor
+        4. autodetect (common/default)
+    -->
+
+    <!-- assign bean person generated above to argument of Order constructor -->
+    <bean id="order" class="bht.model.Order">
+        <constructor-arg type="bht.model.Person" ref="person"/>
     </bean>
 
 </beans>

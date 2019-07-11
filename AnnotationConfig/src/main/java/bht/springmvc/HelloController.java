@@ -1,11 +1,19 @@
 package bht.springmvc;
 
+import bht.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HelloController {
+
+//    @Autowired
+//    @Qualifier("person2")
+    private Person person = new Person("Richard Binh Huynh", 20);
+
 
     //path is /hello
     //when user send /hello to URL
@@ -21,7 +29,9 @@ public class HelloController {
         // Set a new Map with key "msg" value "Steven Vu" (obj)
         // Assign this map to the addAttribute method
         // then return a view with logical name "hello"
+
         map.addAttribute("msg", "Steven Vu");
+//        map.addAttribute("person", person);
         return "hello"; // a view name hello
     }
 }
