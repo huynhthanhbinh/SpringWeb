@@ -70,6 +70,18 @@ public class Hello {
     }
 
 
+    // Working with form - Spring MVC
+    // Auto-assign all fields of form submit
+    // To object model through Spring-form binding
+    //
+    //      1. Create model             eg. User class
+    //      2. Create controller get    eg. @GetMapping("/user/add")
+    //      3. Create view matching controller view name return !
+    //      4. In view, using Spring-form tag to assign / bind together
+    //      5. Create controller post   eg. @PostMapping("/user/add")
+    //      6. In the controller, binding the submit result to model
+
+
     // ViewResolver to return back a view name addUser !
     @GetMapping("/user/add")
     public String addUser(HttpServletRequest request) {
@@ -82,13 +94,6 @@ public class Hello {
         hobbies.add("Swimming");
         hobbies.add("Dancing");
         hobbies.add("Climbing");
-
-//        user.setUsername("huynhthanhbinh");
-//        user.setPassword("0123456789");
-//        user.setId(1653006);
-//        user.setEmail("bht@elca.vn");
-//        user.setHobbies(hobbies);
-//        user.setAcceptAgreement(true);
 
         request.setAttribute("user", user);
         request.setAttribute("hobbies", hobbies);
@@ -108,7 +113,6 @@ public class Hello {
             hobbies.add("Singing");
             hobbies.add("Swimming");
             hobbies.add("Dancing");
-            hobbies.add("Climbing");
 
 
             request.setAttribute("user", user);
