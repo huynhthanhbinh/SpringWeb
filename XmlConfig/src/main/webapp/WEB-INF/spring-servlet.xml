@@ -13,8 +13,10 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
+    <!-- Configuration -->
     <context:component-scan base-package="bht.controllers"/>
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <!-- /WEB-INF/views/<page_name>.jsp -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

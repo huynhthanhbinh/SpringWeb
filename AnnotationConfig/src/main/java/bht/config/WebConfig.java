@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -17,8 +19,9 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan("bht.controllers")
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer {
 
+    // Configure viewResolver for matching view name return by Controller
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver =
@@ -29,6 +32,14 @@ public class WebConfig {
         viewResolver.setSuffix(".jsp");
 
         return viewResolver;
+    }
+
+    // Configure static resource folder for access easily -> /static/
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
     }
 
 
