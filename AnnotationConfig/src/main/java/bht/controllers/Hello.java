@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+@RequestMapping("/bht")
 @Controller
 public class Hello {
 

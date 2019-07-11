@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@RequestMapping("/bht")
 public class Hello {
 
     @Autowired
