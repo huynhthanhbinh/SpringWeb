@@ -5,8 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class Hello {
@@ -33,5 +37,14 @@ public class Hello {
 
         map.addAttribute("person", person);
         return "hello"; // a view name hello
+    }
+
+
+    // Another way to return model and view to view resolver for consulting matching view
+    @GetMapping("/say-hello")
+    public ModelAndView sayHello(HttpServletRequest request) {
+
+        request.setAttribute("person", person);
+        return new ModelAndView("hello");
     }
 }
