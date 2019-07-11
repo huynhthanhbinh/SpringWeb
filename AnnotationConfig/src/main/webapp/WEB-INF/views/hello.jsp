@@ -6,6 +6,13 @@
     <title>Demo Annotation</title>
 </head>
 <body>
+    <h1>
+        Welcome,
+        <span style="color: lightseagreen">
+            <b><u><i>${username}</i></u></b>
+        </span> !
+    </h1>
+
     <h1 style="color: red">Hello ${person.name} !</h1>
     <h1 style="color: red">Your age is ${person.age} !</h1>
     <br>

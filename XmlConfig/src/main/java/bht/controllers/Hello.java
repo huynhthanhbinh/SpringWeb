@@ -8,12 +8,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
 @RequestMapping("/bht")
+@Controller
 public class Hello {
 
     @Autowired
@@ -41,11 +42,15 @@ public class Hello {
     }
 
 
+    // Using @RequestParam, eg. /bht/say-hello?username=Huynh Thanh Binh
     // Another way to return model and view to view resolver for consulting matching view
     @GetMapping("/say-hello")
-    public ModelAndView sayHello(HttpServletRequest request) {
+    public ModelAndView sayHello(HttpServletRequest request,
+                                 @RequestParam(name = "username", required = false,
+                                         defaultValue = "abc def") String username) {
 
         request.setAttribute("person", person);
+        request.setAttribute("username", username);
         return new ModelAndView("hello");
     }
 }
