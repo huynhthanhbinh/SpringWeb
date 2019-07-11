@@ -26,4 +26,12 @@
 
     </bean>
 
+    <bean id="person" class="bht.model.Person" scope="prototype"
+        init-method="initPerson" destroy-method="destroyPerson">
+
+        <constructor-arg name="name" value="Richard"/>
+        <constructor-arg name="age" value="20"/>
+
+    </bean>
+
 </beans>
