@@ -8,9 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Demo</title>
+    <title>Demo Annotation</title>
 </head>
 <body>
-    <h1 style="color: red">Hello ${msg} !</h1>
+    <h1 style="color: red">Hello ${person.name} !</h1>
+    <h1 style="color: red">Your age is ${person.age} !</h1>
 </body>
 </html>

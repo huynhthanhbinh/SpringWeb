@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HelloController {
 
-//    @Autowired
-//    @Qualifier("person2")
-    private Person person = new Person("Richard Binh Huynh", 20);
+    @Autowired
+    @Qualifier("person2")
+    private Person person;
 
 
     //path is /hello
@@ -30,8 +30,7 @@ public class HelloController {
         // Assign this map to the addAttribute method
         // then return a view with logical name "hello"
 
-        map.addAttribute("msg", "Steven Vu");
-//        map.addAttribute("person", person);
+        map.addAttribute("person", person);
         return "hello"; // a view name hello
     }
 }
