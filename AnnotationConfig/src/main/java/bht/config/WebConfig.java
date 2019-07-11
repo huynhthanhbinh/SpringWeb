@@ -1,7 +1,7 @@
 package bht.config;
 
-import bht.model.Order;
-import bht.model.Person;
+import bht.models.Order;
+import bht.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("bht.springmvc")
+@ComponentScan("bht.controllers")
 public class WebConfig {
 
     @Bean

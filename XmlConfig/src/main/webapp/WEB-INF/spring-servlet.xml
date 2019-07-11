@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-    <context:component-scan base-package="bht.springmvc"/>
+    <context:component-scan base-package="bht.controllers"/>
     <mvc:annotation-driven/>
 
     <!-- /WEB-INF/views/<page_name>.jsp -->
@@ -26,8 +26,8 @@
 
     </bean>
 
-    <bean id="person" class="bht.model.Person" scope="prototype"
-        init-method="initPerson" destroy-method="destroyPerson">
+    <bean id="person" class="bht.models.Person" scope="prototype"
+          init-method="initPerson" destroy-method="destroyPerson">
 
         <constructor-arg name="name" value="Richard"/>
         <constructor-arg name="age" value="20"/>
@@ -46,8 +46,8 @@
     -->
 
     <!-- assign bean person generated above to argument of Order constructor -->
-    <bean id="order" class="bht.model.Order">
-        <constructor-arg type="bht.model.Person" ref="person"/>
+    <bean id="order" class="bht.models.Order">
+        <constructor-arg type="bht.models.Person" ref="person"/>
     </bean>
 
 </beans>

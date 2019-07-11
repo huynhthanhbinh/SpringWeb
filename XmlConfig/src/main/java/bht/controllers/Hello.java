@@ -1,6 +1,6 @@
-package bht.springmvc;
+package bht.controllers;
 
-import bht.model.Person;
+import bht.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -8,10 +8,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HelloController {
+public class Hello {
 
     @Autowired
-    @Qualifier("person2")
+    @Qualifier("person")
     private Person person;
 
 
