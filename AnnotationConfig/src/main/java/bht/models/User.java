@@ -9,43 +9,49 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Collections;
 import java.util.List;
 
+
 public class User {
     // All of the configuration of warning message
     // is configure inside messages.properties !
     // Not throw warning in the object class / model file !
 
     // Annotation check the field is not empty
-    @NotEmpty
+    //@NotEmpty
     private String username;
 
     // Annotation limit the max and min of the field
-    @Length(min = 6, max = 20)
+    //@Length(min = 6, max = 20)
     private String password;
 
     // Annotation limit the min of the field
-    @Min(1)
+    //@Min(1)
     private int id;
 
     // Annotation check if the input String is in correct email format
-    @Email
+    //@Email
     private String email;
 
 
     // create an empty-list of hobbies
     private List<String> hobbies;
 
+
+    // Gender of user: male or female
+    private boolean gender;
+
     // a boolean value to store if user accept the agreement or not !
     // check if user accept the page's aggreement !
-    @AssertTrue
+    //@AssertTrue
     private boolean acceptAgreement;
 
 
     public User() {
-        username = "";
-        password = "";
-        email = "";
+        username = "default";
+        password = "P@ssw0rd";
+        email = "default@elca.vn";
         id = 0;
         hobbies = Collections.emptyList();
+        gender = false;
         acceptAgreement = false;
     }
 
@@ -96,5 +102,13 @@ public class User {
 
     public void setAcceptAgreement(boolean acceptAgreement) {
         this.acceptAgreement = acceptAgreement;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
 }

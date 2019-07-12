@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
     <title>Add User Annotation</title>
 </head>
-<body>
-
+<body style="margin-left: 100px">
 <%--
 <form:form></form:form>
 <form:input path=""></form:input>
@@ -24,87 +24,77 @@
 <form:hidden path=""></form:hidden>
 <form:textarea path=""></form:textarea>
 --%>
-
-<form class="form-horizontal">
+<div><h1>Register Form</h1></div>
+<c:url value="/bht/user/add" var="url"/>
+<form:form modelAttribute="user" method="post" action="${url}" autocomplete="false">
 
     <br>
     <div>
         <label for="id">Student ID</label>
         <div>
-            <input id="id" type="text" placeholder="input student ID">
+            <form:input id="id" type="text" autocomplete="false"
+                        placeholder="input student ID" path="id"/>
         </div>
     </div>
-
 
     <br>
     <div>
         <label for="username">Username</label>
         <div>
-            <input id="username" type="text" placeholder="input username">
+            <form:input id="username" type="text" autocomplete="false"
+                        placeholder="input username" path="username"/>
         </div>
     </div>
-
 
     <br>
     <div>
         <label for="password">Password</label>
         <div>
-            <input id="password" type="password" placeholder="input password">
+            <form:input id="password" type="password" autocomplete="false"
+                        placeholder="input password" path="password"/>
         </div>
     </div>
-
 
     <br>
     <div>
         <label for="email">Email</label>
         <div>
-            <input id="email" type="text" placeholder="input email">
+            <form:input id="email" type="text" autocomplete="false"
+                        placeholder="input email" path="email"/>
         </div>
     </div>
 
-
     <br>
     <div>
-        <label>Hobbies</label>
+        <label>Hobbies</label><br>
         <div>
-            <div>
-                <label>
-                    <input type="checkbox" id="coding">Coding
-                </label>
-            </div>
-            <div>
-                <label>
-                    <input type="checkbox" id="singing">Singing
-                </label>
-            </div>
-            <div>
-                <label>
-                    <input type="checkbox" id="swimming">Swimming
-                </label>
-            </div>
-            <div>
-                <label>
-                    <input type="checkbox" id="dancing">Dancing
-                </label>
-            </div>
+            <form:checkbox path="hobbies" value="coding" label="Coding"/>
+            <form:checkbox path="hobbies" value="singing" label="Signging"/>
+            <form:checkbox path="hobbies" value="swimming" label="Swimming"/>
+            <form:checkbox path="hobbies" value="dancing" label="Dancing"/>
         </div>
     </div>
 
+    <br>
+    <div>
+        <label>Gender</label>
+        <form:select path="gender">
+            <form:option value="false">Female</form:option>
+            <form:option value="true">Male</form:option>
+        </form:select>
+    </div>
 
     <br>
     <div>
-        <label>Accept Our Agreement
-            <input type="checkbox" id="acceptAgreement">
-        </label>
+        <form:radiobutton path="acceptAgreement" value="true"
+                          label="Accept Our Agreement"/>
     </div>
-
 
     <br>
     <div>
-        <div>
-            <button id="submit" formmethod="post">Register</button>
-        </div>
+        <form:button id="submit" type="submit">Register</form:button>
     </div>
-</form>
+</form:form>
+
 </body>
 </html>

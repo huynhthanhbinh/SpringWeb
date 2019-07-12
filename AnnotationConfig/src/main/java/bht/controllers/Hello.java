@@ -121,7 +121,7 @@ public class Hello {
             return "user/add";
         }
 
-        request.setAttribute("u", user);
+        request.setAttribute("user", user);
         return "user/view";
     }
 }
