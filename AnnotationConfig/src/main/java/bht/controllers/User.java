@@ -16,8 +16,8 @@ import java.util.List;
 
 // Controller class User --> to decide which view
 // Different from Model class User --> User Object Definition
-@RequestMapping("/bht/user")
 @Controller
+@RequestMapping("/user")
 public class User {
 
     // Validator using for validate model user
