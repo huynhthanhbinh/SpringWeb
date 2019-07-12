@@ -93,7 +93,6 @@ public class Hello {
         hobbies.add("Singing");
         hobbies.add("Swimming");
         hobbies.add("Dancing");
-        hobbies.add("Climbing");
 
         request.setAttribute("user", user);
         request.setAttribute("hobbies", hobbies);

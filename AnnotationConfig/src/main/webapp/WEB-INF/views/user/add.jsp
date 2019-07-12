@@ -7,6 +7,7 @@
     <title>Add User Annotation</title>
 </head>
 <body style="margin-left: 100px">
+
 <%--
 <form:form></form:form>
 <form:input path=""></form:input>
@@ -24,8 +25,10 @@
 <form:hidden path=""></form:hidden>
 <form:textarea path=""></form:textarea>
 --%>
+
 <div><h1>Register Form</h1></div>
 <c:url value="/bht/user/add" var="url"/>
+<%--@elvariable id="user" type="bht.models.User"--%>
 <form:form modelAttribute="user" method="post" action="${url}" autocomplete="false">
 
     <br>
@@ -67,12 +70,8 @@
     <br>
     <div>
         <label>Hobbies</label><br>
-        <div>
-            <form:checkbox path="hobbies" value="coding" label="Coding"/>
-            <form:checkbox path="hobbies" value="singing" label="Signging"/>
-            <form:checkbox path="hobbies" value="swimming" label="Swimming"/>
-            <form:checkbox path="hobbies" value="dancing" label="Dancing"/>
-        </div>
+        <%--@elvariable id="hobbies" type="java.util.List"--%>
+        <form:checkboxes path="hobbies" items="${hobbies}"/>
     </div>
 
     <br>
@@ -94,6 +93,7 @@
     <div>
         <form:button id="submit" type="submit">Register</form:button>
     </div>
+
 </form:form>
 
 </body>
