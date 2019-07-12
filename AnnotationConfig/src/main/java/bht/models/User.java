@@ -16,19 +16,19 @@ public class User {
     // Not throw warning in the object class / model file !
 
     // Annotation check the field is not empty
-    //@NotEmpty
+    @NotEmpty
     private String username;
 
     // Annotation limit the max and min of the field
-    //@Length(min = 6, max = 20)
+    @Length(min = 6, max = 20)
     private String password;
 
     // Annotation limit the min of the field
-    //@Min(1)
+    @Min(1)
     private int id;
 
     // Annotation check if the input String is in correct email format
-    //@Email
+    @Email
     private String email;
 
 
@@ -41,14 +41,14 @@ public class User {
 
     // a boolean value to store if user accept the agreement or not !
     // check if user accept the page's aggreement !
-    //@AssertTrue
+    @AssertTrue
     private boolean acceptAgreement;
 
 
     public User() {
-        username = "default";
-        password = "P@ssw0rd";
-        email = "default@elca.vn";
+        username = "";
+        password = "";
+        email = "";
         id = 0;
         hobbies = Collections.emptyList();
         gender = false;

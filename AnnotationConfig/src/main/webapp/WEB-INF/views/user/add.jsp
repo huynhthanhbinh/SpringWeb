@@ -37,6 +37,9 @@
         <div>
             <form:input id="id" type="text" autocomplete="false"
                         placeholder="input student ID" path="id"/>
+
+            &nbsp;&nbsp;
+            <form:errors path="id" cssStyle="color: red; font-style: italic"/>
         </div>
     </div>
 
@@ -46,6 +49,9 @@
         <div>
             <form:input id="username" type="text" autocomplete="false"
                         placeholder="input username" path="username"/>
+
+            &nbsp;&nbsp;
+            <form:errors path="username" cssStyle="color: red; font-style: italic"/>
         </div>
     </div>
 
@@ -55,6 +61,9 @@
         <div>
             <form:input id="password" type="password" autocomplete="false"
                         placeholder="input password" path="password"/>
+
+            &nbsp;&nbsp;
+            <form:errors path="password" cssStyle="color: red; font-style: italic"/>
         </div>
     </div>
 
@@ -64,6 +73,9 @@
         <div>
             <form:input id="email" type="text" autocomplete="false"
                         placeholder="input email" path="email"/>
+
+            &nbsp;&nbsp;
+            <form:errors path="email" cssStyle="color: red; font-style: italic"/>
         </div>
     </div>
 
@@ -87,6 +99,9 @@
     <div>
         <form:radiobutton path="acceptAgreement" value="true"
                           label="Accept Our Agreement"/>
+
+        &nbsp;&nbsp;
+        <form:errors path="acceptAgreement" cssStyle="color: red; font-style: italic"/>
     </div>
 
     <br>
