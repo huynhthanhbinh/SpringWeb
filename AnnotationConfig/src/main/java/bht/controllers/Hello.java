@@ -107,6 +107,8 @@ public class Hello {
                            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
+            user = new User();
+
             List<String> hobbies = new ArrayList<>();
             hobbies.add("Coding");
             hobbies.add("Singing");

@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Add User Annotation</title>
+    <title>Add User XML</title>
 </head>
 <body style="margin-left: 100px">
 
