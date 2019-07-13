@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>
-    Welcome,
+    Welcome
     <span style="color: lightseagreen">
             <b><u><i>${username}</i></u></b>
         </span> !

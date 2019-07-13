@@ -8,15 +8,18 @@
 1. Configure pom.xml
     1.1 - <properties> -> ${property_name} in version of dependency
     1.2 - <dependencies>
-        1.2.0 - spring-core
-        1.2.1 - spring-webmvc
-        1.2.2 - spring-beans
-        1.2.3 - spring-context
-        1.2.4 - servlet-api
-        1.2.5 - jstl
-        1.2.6 - jsp-api
-        1.2.7 - log4j
-        1.2.8 - mssql-jdbc
+        1.2.0  - spring-core
+        1.2.1  - spring-webmvc
+        1.2.2  - spring-beans
+        1.2.3  - spring-context
+        1.2.4  - servlet-api
+        1.2.5  - jstl
+        1.2.6  - jsp-api
+        1.2.7  - log4j
+        1.2.8  - mssql-jdbc
+        1.2.9  - geronimo-servlet
+        1.2.10 - validation-api
+        1.2.11 - hibernate-validator
 
 (Remind:
     /webapp folder is the root directory of web application !!!
@@ -74,3 +77,47 @@
         }
     }
 
+6. Clean Architecture - (MVC v.s 3-tiers)
+
+    MVC       --> Model - View - Controller
+    3-tiers   --> Presentation - BusinessLogic - DataAccess
+    Hibernate --> using for transfer data/ processing database
+
+
+     Client       : view consults form ViewResolver
+(req) ↓ ↑ (res)
+   Controller     : Spring Controller: return model + view name
+      ↓ ↑
+ Service Layer    : Contact Service <-- ContactServiceImpl
+      ↓ ↑
+Data Access Layer : Contact DAO     <-- ContactDAOImpl
+      ↓ ↑
+   Database       : MSSQL, MySQL, pSQL, noSQL,...
+
+
+*** Annotations according to the Web-Architecture ?
+
+    @Controller  : Create bean, indicate as Controller class
+    @Service     : Create bean, indicate as Service class
+    @Repository  : Create bean, indicate as DAO class
+    @Component   : else as Component of a Service for eg.
+
+*** Some more common Spring-web annotations:
+
+    @Configuration
+    @RequestMapping
+    @PathVariable
+    @RequestParam
+    @RequestBody            ???
+    @ResponseBody           ???
+
+
+*** Something else ^^
+
+    @Import
+    @ComponentScan
+    @ComponentsScan
+    @Bean
+    @Qualifier
+    @Valid
+    @ModelAttribute
