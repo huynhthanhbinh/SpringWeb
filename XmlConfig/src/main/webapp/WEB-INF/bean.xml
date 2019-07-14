@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-    <bean id="person" class="bht.models.Person" scope="prototype"
+    <bean id="person" class="com.bht.models.Person" scope="prototype"
           init-method="initPerson" destroy-method="destroyPerson">
 
         <constructor-arg name="name" value="Richard"/>
@@ -28,8 +28,8 @@
     -->
 
     <!-- assign bean person generated above to argument of Order constructor -->
-    <bean id="order" class="bht.models.Order">
-        <constructor-arg type="bht.models.Person" ref="person"/>
+    <bean id="order" class="com.bht.models.Order">
+        <constructor-arg type="com.bht.models.Person" ref="person"/>
     </bean>
 
 </beans>

@@ -1,6 +1,6 @@
-package bht.controllers;
+package com.bht.controllers;
 
-import bht.validator.UserValidator;
+import com.bht.validators.UserValidator;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class User {
     @GetMapping("/add")
     public String addUser(HttpServletRequest request) {
 
-        bht.models.User user = new bht.models.User();
+        com.bht.models.User user = new com.bht.models.User();
 
         List<String> hobbies = new ArrayList<>();
         hobbies.add("Coding");
@@ -63,7 +63,7 @@ public class User {
     // URL : /bht/user/add, request method: POST
     @PostMapping("/add")
     public String viewUser(HttpServletRequest request,
-                           @ModelAttribute("user") bht.models.User user,
+                           @ModelAttribute("user") com.bht.models.User user,
                            @RequestParam("fileUpload") MultipartFile file,
                            BindingResult bindingResult) {
 
@@ -73,7 +73,7 @@ public class User {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            user = new bht.models.User();
+            user = new com.bht.models.User();
 
             List<String> hobbies = new ArrayList<>();
             hobbies.add("Coding");

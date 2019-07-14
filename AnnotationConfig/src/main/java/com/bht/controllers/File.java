@@ -1,4 +1,4 @@
-package bht.controllers;
+package com.bht.controllers;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;

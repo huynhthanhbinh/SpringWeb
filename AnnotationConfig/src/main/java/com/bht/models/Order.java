@@ -1,4 +1,4 @@
-package bht.models;
+package com.bht.models;
 
 public class Order {
     private Person person;

@@ -1,6 +1,6 @@
-package bht.validator;
+package com.bht.validators;
 
-import bht.models.User;
+import com.bht.models.User;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;

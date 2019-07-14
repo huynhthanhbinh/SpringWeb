@@ -1,7 +1,7 @@
-package bht.controllers;
+package com.bht.controllers;
 
-import bht.models.Person;
-import bht.models.User;
+import com.bht.models.Person;
+import com.bht.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequestMapping("/bht")
+@RequestMapping("/com/bht")
 @Controller
 public class Hello {
 
@@ -33,7 +33,7 @@ public class Hello {
     //which match this will be implement the view
     //finally the view is return back to the browser
     //user now can see the new view !
-    @RequestMapping(value = {"/", "/hello"}, method = RequestMethod.GET) //path is /hello
+    @GetMapping({"/", "/hello"}) //path is /hello
     public String sayHello(ModelMap map) {
         // Set a new Map with key "msg" value "Steven Vu" (obj)
         // Assign this map to the addAttribute method

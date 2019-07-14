@@ -1,4 +1,4 @@
-package bht.models;
+package com.bht.models;
 
 import org.apache.log4j.Logger;
 

@@ -28,7 +28,7 @@
 
 <div><h1>Register Form</h1></div>
 <c:url value="/bht/user/add" var="url"/>
-<%--@elvariable id="user" type="bht.models.User"--%>
+<%--@elvariable id="user" type="com.bht.models.User"--%>
 <form:form modelAttribute="user" method="post" action="${url}" autocomplete="false">
 
     <br>
@@ -82,7 +82,7 @@
     <br>
     <div>
         <label>Hobbies</label><br>
-        <%--@elvariable id="hobbies" type="java.util.List"--%>
+            <%--@elvariable id="hobbies" type="java.util.List"--%>
         <form:checkboxes path="hobbies" items="${hobbies}" delimiter="<br>"/>
     </div>
 

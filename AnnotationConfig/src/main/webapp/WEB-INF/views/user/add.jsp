@@ -28,7 +28,7 @@
 
 <div><h1>Register Form</h1></div>
 <c:url value="/user/add" var="url"/>
-<%--@elvariable id="user" type="bht.models.User"--%>
+<%--@elvariable id="user" type="com.bht.models.User"--%>
 <form:form modelAttribute="user" method="post" action="${url}"
            autocomplete="false" enctype="multipart/form-data">
 

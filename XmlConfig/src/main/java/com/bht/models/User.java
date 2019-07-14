@@ -1,5 +1,11 @@
-package bht.models;
+package com.bht.models;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,19 +16,19 @@ public class User {
     // Not throw warning in the object class / model file !
 
     // Annotation check the field is not empty
-    //@NotEmpty
+    @NotEmpty
     private String username;
 
     // Annotation limit the max and min of the field
-    //@Length(min = 6, max = 20)
+    @Length(min = 6, max = 20)
     private String password;
 
     // Annotation limit the min of the field
-    //@Min(1)
+    @Min(1)
     private int id;
 
     // Annotation check if the input String is in correct email format
-    //@Email
+    @Email
     private String email;
 
 
@@ -33,15 +39,9 @@ public class User {
     // Gender of user: male or female
     private boolean gender;
 
-
-    // Avatar path
-    private boolean hasAvatar;
-    private String avatarPath;
-
-
     // a boolean value to store if user accept the agreement or not !
     // check if user accept the page's aggreement !
-    //@AssertTrue
+    @AssertTrue
     private boolean acceptAgreement;
 
 
@@ -52,8 +52,6 @@ public class User {
         id = 0;
         hobbies = Collections.emptyList();
         gender = false;
-        hasAvatar = false;
-        avatarPath = "unknown.jpg";
         acceptAgreement = false;
     }
 
@@ -106,27 +104,11 @@ public class User {
         this.acceptAgreement = acceptAgreement;
     }
 
-    public boolean getGender() {
+    public boolean isGender() {
         return gender;
     }
 
     public void setGender(boolean gender) {
         this.gender = gender;
-    }
-
-    public boolean getHasAvatar() {
-        return hasAvatar;
-    }
-
-    public void setHasAvatar(boolean hasAvatar) {
-        this.hasAvatar = hasAvatar;
-    }
-
-    public String getAvatarPath() {
-        return avatarPath;
-    }
-
-    public void setAvatarPath(String avatarPath) {
-        this.avatarPath = avatarPath;
     }
 }

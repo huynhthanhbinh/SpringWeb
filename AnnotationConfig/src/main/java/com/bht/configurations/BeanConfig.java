@@ -1,7 +1,7 @@
-package bht.config;
+package com.bht.configurations;
 
-import bht.models.Order;
-import bht.models.Person;
+import com.bht.models.Order;
+import com.bht.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

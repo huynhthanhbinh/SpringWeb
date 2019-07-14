@@ -1,11 +1,10 @@
-package bht.config;
+package com.bht.configurations;
 
-import bht.validator.UserValidator;
+import com.bht.validators.UserValidator;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -19,8 +18,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("bht.controllers")
-@Import(bht.config.BeanConfig.class)
+@ComponentScan("com.bht")
 public class WebConfig implements WebMvcConfigurer {
 
     // Configure viewResolver for matching view name return by Controller
