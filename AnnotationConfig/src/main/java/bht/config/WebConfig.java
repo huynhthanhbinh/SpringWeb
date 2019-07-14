@@ -7,6 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -39,7 +41,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/");
+                .addResourceLocations("/WEB-INF/resources/");
     }
 
 
@@ -50,6 +52,9 @@ public class WebConfig implements WebMvcConfigurer {
                 new ReloadableResourceBundleMessageSource();
 
         // current class path is: src/main/java/ -> go to messages.properties
+        // since all properties config files are in classpath
+        // need to define the path with prefix "classpath(*):"
+        // otherwise, it'll look into the web directory: webapp
         bundleMessageSource.setBasename("classpath:messages");
         bundleMessageSource.setDefaultEncoding("UTF-8");
 
@@ -62,5 +67,18 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public UserValidator userValidator() {
         return new UserValidator();
+    }
+
+
+    // MultipartResolver : Spring Upload file
+    @Bean
+    public MultipartResolver multipartResolver() {
+
+        CommonsMultipartResolver multipartResolver =
+                new CommonsMultipartResolver();
+
+        // Max-Upload-Size by Byte : ~1MB for eg.
+        multipartResolver.setMaxUploadSize(1000000000);
+        return multipartResolver;
     }
 }
