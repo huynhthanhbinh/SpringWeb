@@ -1,6 +1,5 @@
 package com.bht.configurations;
 
-import com.bht.validators.UserValidator;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -57,14 +56,6 @@ public class WebConfig implements WebMvcConfigurer {
         bundleMessageSource.setDefaultEncoding("UTF-8");
 
         return bundleMessageSource;
-    }
-
-
-    // Validator using for validate model User
-    // Check user-register form submit
-    @Bean
-    public UserValidator userValidator() {
-        return new UserValidator();
     }
 
 

@@ -1,12 +1,14 @@
 package com.bht.validators;
 
 import com.bht.models.User;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 
 // Validator for model User
+@Component
 public class UserValidator implements Validator {
 
     // Support method
