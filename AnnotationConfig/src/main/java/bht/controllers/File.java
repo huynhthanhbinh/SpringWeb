@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @RequestMapping("/file")
@@ -60,5 +64,41 @@ public class File {
         }
 
         return "file/view";
+    }
+
+    @GetMapping("/download")
+    public void download(
+            HttpServletRequest request,
+            HttpServletResponse response) {
+
+        // Get the directory contains file to download
+        String directory = request
+                .getServletContext()
+                .getRealPath("/WEB-INF/resources/uploads/");
+
+        // Get file name me.jpg from the chosen directory
+        Path path = Paths.get(directory, "me.jpg");
+
+        // if exist a file as description above, then
+        if (path.toFile().exists()) {
+
+            // Download file to client-pc
+            // Search google for "image-content-type-header"
+            response.setContentType("image/jpeg");
+            response.addHeader(
+                    "Content-Disposition",
+                    "attachment; filename = me.jpg");
+
+            try {
+                // copy file to response
+                Files.copy(path, response.getOutputStream());
+
+                // close Stream and force output !
+                response.getOutputStream().flush();
+
+            } catch (IOException e) {
+                logger.info(e);
+            }
+        }
     }
 }
