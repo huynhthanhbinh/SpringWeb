@@ -29,7 +29,8 @@
 <div><h1>Register Form</h1></div>
 <c:url value="/user/add" var="url"/>
 <%--@elvariable id="user" type="bht.models.User"--%>
-<form:form modelAttribute="user" method="post" action="${url}" autocomplete="false">
+<form:form modelAttribute="user" method="post" action="${url}"
+           autocomplete="false" enctype="multipart/form-data">
 
     <br>
     <div>
@@ -98,7 +99,10 @@
     <br>
     <div>
         <label>Avatar</label>
-
+        <div>
+            <input type="file" name="fileUpload" autocomplete="false"
+                   accept="image/*"> <!-- accept only image format -->
+        </div>
     </div>
 
     <br>

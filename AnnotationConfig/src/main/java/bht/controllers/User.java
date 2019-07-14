@@ -1,15 +1,18 @@
 package bht.controllers;
 
 import bht.validator.UserValidator;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class User {
+    private Logger logger = Logger.getRootLogger();
 
     // Validator using for validate model user
     @Autowired
@@ -60,6 +64,7 @@ public class User {
     @PostMapping("/add")
     public String viewUser(HttpServletRequest request,
                            @ModelAttribute("user") bht.models.User user,
+                           @RequestParam("fileUpload") MultipartFile file,
                            BindingResult bindingResult) {
 
         // Using customized-validator
@@ -81,6 +86,45 @@ public class User {
             request.setAttribute("hobbies", hobbies);
 
             return "user/add";
+        }
+
+        // check if has avatar upload or not
+        // if not, it will take the unknown.jpg for default
+        if (!file.isEmpty()) {
+
+            // Set avatar file name as format <userID>.<extension>
+            // For eg. 1653006.jpg
+            String fileName = user.getId() + "." +
+                    FilenameUtils.getExtension(file.getOriginalFilename());
+
+
+            // Create new path according to Origin file name
+            String path = getClass()
+                    .getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .getPath()
+                    .replace("/classes/",
+                            "/resources/users/")
+                    + fileName;
+
+            File newFile = new File(path);
+
+            // Save File to web-resources (Server-side)
+            // fileOutputStream.close() in finally clause !
+            // Using try-with-resources for auto-close stream !
+            try (FileOutputStream fileOutputStream =
+                         new FileOutputStream(newFile)) {
+
+                fileOutputStream.write(file.getBytes());
+
+            } catch (IOException e) {
+                logger.info(e);
+
+            } finally {
+                user.setHasAvatar(true);
+                user.setAvatarPath(fileName);
+            }
         }
 
         request.setAttribute("user", user);
