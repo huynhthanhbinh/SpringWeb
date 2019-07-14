@@ -33,6 +33,12 @@ public class User {
     // Gender of user: male or female
     private boolean gender;
 
+
+    // Avatar path
+    private boolean hasAvatar;
+    private String avatarPath;
+
+
     // a boolean value to store if user accept the agreement or not !
     // check if user accept the page's aggreement !
     //@AssertTrue
@@ -46,6 +52,8 @@ public class User {
         id = 0;
         hobbies = Collections.emptyList();
         gender = false;
+        hasAvatar = false;
+        avatarPath = "unknown.jpg";
         acceptAgreement = false;
     }
 
@@ -98,11 +106,27 @@ public class User {
         this.acceptAgreement = acceptAgreement;
     }
 
-    public boolean isGender() {
+    public boolean getGender() {
         return gender;
     }
 
     public void setGender(boolean gender) {
         this.gender = gender;
+    }
+
+    public boolean getHasAvatar() {
+        return hasAvatar;
+    }
+
+    public void setHasAvatar(boolean hasAvatar) {
+        this.hasAvatar = hasAvatar;
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
     }
 }

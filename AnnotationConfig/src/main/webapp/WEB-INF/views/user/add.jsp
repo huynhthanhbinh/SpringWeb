@@ -97,6 +97,12 @@
 
     <br>
     <div>
+        <label>Avatar</label>
+
+    </div>
+
+    <br>
+    <div>
         <form:radiobutton path="acceptAgreement" value="true"
                           label="Accept Our Agreement"/>
 
