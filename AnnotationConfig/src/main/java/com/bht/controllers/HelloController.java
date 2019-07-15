@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/hello")
-public class Hello {
+public class HelloController {
 
     private static final String helloView = "hello/view";
 

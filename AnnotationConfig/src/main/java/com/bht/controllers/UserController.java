@@ -1,5 +1,7 @@
 package com.bht.controllers;
 
+import com.bht.models.User;
+import com.bht.services.UserService;
 import com.bht.validators.UserValidator;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
@@ -21,8 +23,14 @@ import java.util.List;
 // Different from Model class User --> User Object Definition
 @Controller
 @RequestMapping("/user")
-public class User {
+public class UserController {
     private Logger logger = Logger.getRootLogger();
+
+
+    // UserService: add, delete, update, getOne, getAll
+    @Autowired
+    private UserService userService;
+
 
     // Validator using for validate model user
     @Autowired
@@ -128,6 +136,36 @@ public class User {
         }
 
         request.setAttribute("user", user);
+        return "user/view";
+    }
+
+
+    // Get List of users
+    @GetMapping("/list")
+    public String getAllUser(HttpServletRequest request) {
+
+        // Get UserList from UserService
+        // UserService will call UserDao
+        // UserDao query data from dbs
+        // Then return back to UserDao then UserService
+        // Assign result to new List<User>
+        // Then send to View to show to client
+        List<User> users = userService.getAllUsers();
+        request.setAttribute("users", users);
+
+        return "user/list";
+    }
+
+
+    // View info of a specific user
+    @GetMapping("/{userId}")
+    public String getUser(HttpServletRequest request,
+                          @PathVariable(name = "userId") int id) {
+
+        // Get a specific user by id
+        // then assign it to request attribute
+        // then request is sent to ViewSolver with logical view name
+        request.setAttribute("user", userService.getUserById(id));
         return "user/view";
     }
 }

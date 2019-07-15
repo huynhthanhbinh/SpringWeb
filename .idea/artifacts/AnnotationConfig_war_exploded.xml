@@ -22,8 +22,12 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.1.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.1.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.1.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.1.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.1.8.RELEASE" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.16" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
-          <element id="library" level="project" name="Maven: com.microsoft.sqlserver:mssql-jdbc:7.3.1.jre12-preview" />
+          <element id="library" level="project" name="Maven: com.microsoft.sqlserver:mssql-jdbc:7.2.2.jre8" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.4" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.2" />

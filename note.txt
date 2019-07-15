@@ -121,3 +121,6 @@ Data Access Layer : Contact DAO     <-- ContactDAOImpl
     @Qualifier
     @Valid
     @ModelAttribute
+
+
+Clean Maven Build : Terminal --> mvn clean [enter]

@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 
 @Controller
 @RequestMapping("/file")
-public class File {
+public class FileController {
 
     private Logger logger = Logger.getRootLogger();
 
