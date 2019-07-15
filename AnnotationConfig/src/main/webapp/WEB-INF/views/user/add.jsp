@@ -34,13 +34,10 @@
 
     <br>
     <div>
-        <label for="id">Student ID</label>
+        <label for="id">User ID (Auto-increment)</label>
         <div>
-            <form:input id="id" type="text" autocomplete="false"
-                        placeholder="input student ID" path="id"/>
-
-            &nbsp;&nbsp;
-            <form:errors path="id" cssStyle="color: red; font-style: italic"/>
+            <input id="id" type="number" value="${user.id}"
+                   readonly disabled/>
         </div>
     </div>
 

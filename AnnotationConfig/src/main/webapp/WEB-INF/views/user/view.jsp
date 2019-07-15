@@ -11,7 +11,7 @@
 
 <table border="1" cellpadding="10" cellspacing="5">
     <tr>
-        <th style="text-align: right">Student ID :</th>
+        <th style="text-align: right">User ID :</th>
         <td>${user.id}</td>
     </tr>
     <tr>

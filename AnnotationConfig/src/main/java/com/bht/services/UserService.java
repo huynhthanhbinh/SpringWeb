@@ -9,6 +9,8 @@ import java.util.List;
 // Create, Read, Update, Delete
 public interface UserService {
 
+    int nextIdValue();
+
     boolean addUser(User user);
 
     boolean updateUser(User user);

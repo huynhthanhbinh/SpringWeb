@@ -19,9 +19,17 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
+    public int nextIdValue() {
+        return jdbcTemplate.queryForObject(
+                "SELECT IDENT_CURRENT('[User]') + 1",
+                Integer.class
+        );
+    }
+
+    @Override
     public boolean addUser(User user) {
 
-        String sql = "INSERT INTO [User](username, password, email, gender, hasAvatar) VALUE(?,?,?,?,?)";
+        String sql = "INSERT INTO [User](username, password, email, gender, hasAvatar) VALUES(?,?,?,?,?)";
 
         jdbcTemplate.update(sql,
                 user.getUsername(),

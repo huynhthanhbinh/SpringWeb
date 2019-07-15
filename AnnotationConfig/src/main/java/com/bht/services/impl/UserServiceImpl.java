@@ -24,6 +24,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public int nextIdValue() {
+        return userDao.nextIdValue();
+    }
+
+
+    @Override
     public boolean addUser(User user) {
         return userDao.addUser(user);
     }

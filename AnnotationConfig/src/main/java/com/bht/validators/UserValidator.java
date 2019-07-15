@@ -56,12 +56,6 @@ public class UserValidator implements Validator {
         }
 
 
-        // Check if ID is a positive number
-        if (user.getId() < 1) {
-            errors.rejectValue("id", "id.negative");
-        }
-
-
         // Check if email is in correct form ! using regex
         // Email format for validate
         String emailFormat = "^[\\w-_.+]*[\\w-_.]@([\\w]+\\.)+[\\w]+[\\w]$";

@@ -53,7 +53,9 @@ public class UserController {
     @GetMapping("/add")
     public String addUser(HttpServletRequest request) {
 
-        com.bht.models.User user = new com.bht.models.User();
+        User user = new User();
+
+        user.setId(userService.nextIdValue());
 
         List<String> hobbies = new ArrayList<>();
         hobbies.add("Coding");
@@ -82,6 +84,8 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             user = new com.bht.models.User();
+
+            user.setId(userService.nextIdValue());
 
             List<String> hobbies = new ArrayList<>();
             hobbies.add("Coding");
@@ -135,8 +139,8 @@ public class UserController {
             }
         }
 
-        request.setAttribute("user", user);
-        return "user/view";
+        userService.addUser(user);
+        return "redirect:/user/list";
     }
 
 
@@ -168,4 +172,6 @@ public class UserController {
         request.setAttribute("user", userService.getUserById(id));
         return "user/view";
     }
+
+
 }

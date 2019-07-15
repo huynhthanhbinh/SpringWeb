@@ -7,6 +7,8 @@ import java.util.List;
 // For accessing database
 public interface UserDao {
 
+    int nextIdValue();
+
     boolean addUser(User user);
 
     boolean updateUser(User user);

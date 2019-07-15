@@ -10,7 +10,15 @@
 <hr>
 
 <div>
-    <table border="1" cellpadding="10" cellspacing="5">
+    <button onclick="
+        location.href=location.pathname.replace('/list', '/add')"
+            style="font-size: large">
+        &nbsp;Add new user&nbsp;
+    </button>
+</div>
+<br>
+<div>
+    <table border="1" cellpadding="10" cellspacing="0">
         <tr style="text-align: center">
             <th>ID</th>
             <th>Username</th>
@@ -18,7 +26,7 @@
             <th>Email</th>
             <th>Gender</th>
             <th>HasAvatar</th>
-            <th>View</th>
+            <th>Modify</th>
         </tr>
 
         <%--@elvariable id="users" type="java.util.List"--%>
@@ -32,9 +40,19 @@
                 <td>${user.hasAvatar}</td>
 
                 <td>
+                    &nbsp;&nbsp;
                     <a href="<c:url value='/user/${user.id}'/>">
-                        View user
+                        View
                     </a>
+                    &nbsp;&nbsp;
+                    <a href="<c:url value='/user/${user.id}/update'/>">
+                        Update
+                    </a>
+                    &nbsp;&nbsp;
+                    <a href="<c:url value='/user/${user.id}/delete'/>">
+                        Delete
+                    </a>
+                    &nbsp;&nbsp;
                 </td>
             </tr>
         </c:forEach>
