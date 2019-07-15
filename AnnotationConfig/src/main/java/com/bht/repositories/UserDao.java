@@ -13,7 +13,7 @@ public interface UserDao {
 
     boolean updateUser(User user);
 
-    boolean removeUser(int id);
+    boolean deleteUser(int id);
 
     User getUserById(int id);
 

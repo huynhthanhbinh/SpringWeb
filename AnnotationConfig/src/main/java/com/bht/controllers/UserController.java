@@ -73,7 +73,7 @@ public class UserController {
     // URL : /bht/user/add, request method: POST
     @PostMapping("/add")
     public String viewUser(HttpServletRequest request,
-                           @ModelAttribute("user") com.bht.models.User user,
+                           @ModelAttribute("user") User user,
                            @RequestParam("fileUpload") MultipartFile file,
                            BindingResult bindingResult) {
 
@@ -83,7 +83,7 @@ public class UserController {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            user = new com.bht.models.User();
+            user = new User();
 
             user.setId(userService.nextIdValue());
 
@@ -174,4 +174,106 @@ public class UserController {
     }
 
 
+    // delete a user
+    @GetMapping("/{userId}/delete")
+    public String deleteUser(HttpServletRequest request,
+                             @PathVariable(name = "userId") int id) {
+
+        userService.deleteUser(id);
+        return "redirect:/user/list";
+    }
+
+
+    // update a user
+    @GetMapping("/{userId}/edit")
+    public String updateUser(HttpServletRequest request,
+                             @PathVariable(name = "userId") int id) {
+
+        User user = userService.getUserById(id);
+        user.setAcceptAgreement(true);
+
+        List<String> hobbies = new ArrayList<>();
+        hobbies.add("Coding");
+        hobbies.add("Singing");
+        hobbies.add("Swimming");
+        hobbies.add("Dancing");
+
+        request.setAttribute("user", user);
+        request.setAttribute("hobbies", hobbies);
+        return "user/edit";
+    }
+
+
+    @PostMapping("/{userId}/edit")
+    public String viewUpdate(HttpServletRequest request,
+                             @ModelAttribute("user") User user,
+                             @RequestParam("fileUpload") MultipartFile file,
+                             @PathVariable(name = "userId") int id,
+                             BindingResult bindingResult) {
+
+        User current = userService.getUserById(id);
+        user.setId(current.getId());
+        user.setUsername(current.getUsername());
+
+        userValidator.validate(user, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            user = userService.getUserById(user.getId());
+            user.setAcceptAgreement(true);
+
+            List<String> hobbies = new ArrayList<>();
+            hobbies.add("Coding");
+            hobbies.add("Singing");
+            hobbies.add("Swimming");
+            hobbies.add("Dancing");
+
+
+            request.setAttribute("user", user);
+            request.setAttribute("hobbies", hobbies);
+
+            return "user/edit";
+        }
+
+        // check if has avatar upload or not
+        // if not, it will take the unknown.jpg for default
+        if (!file.isEmpty()) {
+
+            // Set avatar file name as format <userID>.<extension>
+            // For eg. 1653006.jpg
+            String fileName = user.getId() + "." +
+                    FilenameUtils.getExtension(file.getOriginalFilename());
+
+
+            // Create new path according to Origin file name
+            String path = getClass()
+                    .getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .getPath()
+                    .replace("/classes/",
+                            "/resources/users/")
+                    + fileName;
+
+            File newFile = new File(path);
+
+            // Save File to web-resources (Server-side)
+            // fileOutputStream.close() in finally clause !
+            // Using try-with-resources for auto-close stream !
+            try (FileOutputStream fileOutputStream =
+                         new FileOutputStream(newFile)) {
+
+                fileOutputStream.write(file.getBytes());
+
+            } catch (IOException e) {
+                logger.info(e);
+
+            } finally {
+                user.setHasAvatar(true);
+                user.setAvatarPath(fileName);
+            }
+        }
+
+        userService.updateUser(user);
+        return "redirect:/user/list";
+    }
 }

@@ -45,8 +45,8 @@
                         View
                     </a>
                     &nbsp;&nbsp;
-                    <a href="<c:url value='/user/${user.id}/update'/>">
-                        Update
+                    <a href="<c:url value='/user/${user.id}/edit'/>">
+                        Edit
                     </a>
                     &nbsp;&nbsp;
                     <a href="<c:url value='/user/${user.id}/delete'/>">

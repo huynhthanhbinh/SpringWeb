@@ -1,33 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html>
 <head>
-    <title>Demo Add User</title>
+    <title>Demo Edit User</title>
 </head>
 <body style="margin-left: 100px">
 
-<%--
-<form:form></form:form>
-<form:input path=""></form:input>
-<form:button></form:button>
-<form:checkbox path=""></form:checkbox>
-<form:checkboxes path="" items=""></form:checkboxes>
-<form:option value=""></form:option>
-<form:options></form:options>
-<form:radiobutton path=""></form:radiobutton>
-<form:radiobuttons path=""></form:radiobuttons>
-<form:label path=""></form:label>
-<form:password path=""></form:password>
-<form:select path=""></form:select>
-<form:textarea path=""></form:textarea>
-<form:hidden path=""></form:hidden>
-<form:textarea path=""></form:textarea>
---%>
-
-<div><h1>Register User Form</h1></div>
-<c:url value="/user/add" var="url"/>
+<div><h1>Edit User Form</h1></div>
+<c:url value="/user/${user.id}/edit" var="url"/>
 <%--@elvariable id="user" type="com.bht.models.User"--%>
 <form:form modelAttribute="user" method="post" action="${url}"
            autocomplete="false" enctype="multipart/form-data">
@@ -37,7 +18,7 @@
         <label for="id">User ID (Auto-increment)</label>
         <div>
             <input id="id" type="number" value="${user.id}"
-                   readonly disabled/>
+                   readonly disabled name="id"/>
         </div>
     </div>
 
@@ -45,11 +26,8 @@
     <div>
         <label for="username">Username</label>
         <div>
-            <form:input id="username" type="text" autocomplete="false"
-                        placeholder="input username" path="username"/>
-
-            &nbsp;&nbsp;
-            <form:errors path="username" cssStyle="color: red; font-style: italic"/>
+            <input id="username" type="text" value="${user.username}"
+                   readonly disabled name="username"/>
         </div>
     </div>
 
@@ -104,16 +82,7 @@
 
     <br>
     <div>
-        <form:radiobutton path="acceptAgreement" value="true"
-                          label="Accept Our Agreement"/>
-
-        &nbsp;&nbsp;
-        <form:errors path="acceptAgreement" cssStyle="color: red; font-style: italic"/>
-    </div>
-
-    <br>
-    <div>
-        <form:button id="submit" type="submit">Register</form:button>
+        <form:button id="submit" type="submit">Update</form:button>
     </div>
 
 </form:form>
