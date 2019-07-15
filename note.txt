@@ -124,3 +124,5 @@ Data Access Layer : Contact DAO     <-- ContactDAOImpl
 
 
 Clean Maven Build : Terminal --> mvn clean [enter]
+Path of properties files in src/main/java/resources
+Remember to add prefix: "classpath:<property_file_name>"
