@@ -164,7 +164,7 @@ public class UserController {
     // View info of a specific user
     @GetMapping("/{userId}")
     public String getUser(HttpServletRequest request,
-                          @PathVariable(name = "userId") int id) {
+                          @PathVariable("userId") int id) {
 
         // Get a specific user by id
         // then assign it to request attribute
@@ -177,7 +177,7 @@ public class UserController {
     // delete a user
     @GetMapping("/{userId}/delete")
     public String deleteUser(HttpServletRequest request,
-                             @PathVariable(name = "userId") int id) {
+                             @PathVariable("userId") int id) {
 
         userService.deleteUser(id);
         return "redirect:/user/list";
@@ -187,10 +187,9 @@ public class UserController {
     // update a user
     @GetMapping("/{userId}/edit")
     public String updateUser(HttpServletRequest request,
-                             @PathVariable(name = "userId") int id) {
+                             @PathVariable("userId") int id) {
 
         User user = userService.getUserById(id);
-        user.setAcceptAgreement(true);
 
         List<String> hobbies = new ArrayList<>();
         hobbies.add("Coding");
@@ -208,18 +207,14 @@ public class UserController {
     public String viewUpdate(HttpServletRequest request,
                              @ModelAttribute("user") User user,
                              @RequestParam("fileUpload") MultipartFile file,
-                             @PathVariable(name = "userId") int id,
+                             @PathVariable("userId") int id,
                              BindingResult bindingResult) {
 
-        User current = userService.getUserById(id);
-        user.setId(current.getId());
-        user.setUsername(current.getUsername());
-
+        user.setAcceptAgreement(true);
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
             user = userService.getUserById(user.getId());
-            user.setAcceptAgreement(true);
 
             List<String> hobbies = new ArrayList<>();
             hobbies.add("Coding");

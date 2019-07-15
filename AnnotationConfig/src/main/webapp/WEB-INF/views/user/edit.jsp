@@ -18,7 +18,8 @@
         <label for="id">User ID (Auto-increment)</label>
         <div>
             <input id="id" type="number" value="${user.id}"
-                   readonly disabled name="id"/>
+                   readonly name="id"
+                   style="background-color: darkgrey"/>
         </div>
     </div>
 
@@ -27,7 +28,8 @@
         <label for="username">Username</label>
         <div>
             <input id="username" type="text" value="${user.username}"
-                   readonly disabled name="username"/>
+                   readonly name="username"
+                   style="background-color: darkgrey"/>
         </div>
     </div>
 

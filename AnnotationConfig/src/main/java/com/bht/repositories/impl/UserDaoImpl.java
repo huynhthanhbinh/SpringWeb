@@ -46,10 +46,10 @@ public class UserDaoImpl implements UserDao {
     public boolean updateUser(User user) {
 
         String sql = "UPDATE [User] SET " +
-                "username = ? AND " +
-                "password = ? AND " +
-                "email = ? AND " +
-                "gender = ? AND " +
+                "username = ? , " +
+                "password = ? , " +
+                "email = ? , " +
+                "gender = ? , " +
                 "hasAvatar = ? " +
                 "WHERE id = ? ";
 
