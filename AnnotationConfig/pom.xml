@@ -60,6 +60,13 @@
             <version>${springframework.version}</version>
         </dependency>
 
+        <!-- Spring TX for handling transaction -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+
         <!-- JDBC Driver for MySQL -->
         <dependency>
             <groupId>mysql</groupId>
@@ -75,6 +82,8 @@
         </dependency>
 
         <!-- Microsoft JDBC Driver for MSSQL Server -->
+        <!-- Look carefully at the jdk version using -->
+        <!-- For eg. jre8 : Java Runtime Environment 8 -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
