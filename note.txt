@@ -169,3 +169,38 @@ Ensure succeed or roll back (if fail) : data integrity !!!
 
         Hibernate ORM is one of the most mature JPA implementation
         Hibernate is still a popular option for ORM in Java
+
+8. Log4j - Spring Logging
+
+    - Library of Apache
+    - Support logging eg. data, error, exception,...
+    - Multi output support : console, file, ...
+    - Local development  : print console log
+    - Production version : print file log
+
+    - Multi-levels: ↓ (from highest to lowest)
+        + all
+        + debug
+        + info
+        + warn
+        + error
+        + fatal
+        + off
+
+    - Maven dependency: apache log4j
+    - Configuration: create log4j.properties in resources
+
+        + rootLogger=DEBUG, FILE, CONSOLE
+        + Threshold : log levels per each option
+        + MaxFileSize : Max File Capacity
+        + MaxBackupIndex : Max Number of log files
+
+    - Log4j log pattern: %d [%t] %-5p (%F: %L) – %m%n
+
+        + Date – Full date until microseconds.
+        + Thread – JVM thread logging the output.
+        + Logging Mode – INFO/ERROR/DEBUG/WARN.
+        + Class – Java Class logging the output.
+        + Line  – Line number in java class.
+        + Message – The message logged.
+        + Default line separator

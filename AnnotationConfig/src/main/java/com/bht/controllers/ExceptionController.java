@@ -2,6 +2,7 @@ package com.bht.controllers;
 
 import org.apache.log4j.Logger;
 import org.hibernate.exception.JDBCConnectionException;
+import org.hibernate.exception.SQLGrammarException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -20,19 +21,30 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @ControllerAdvice
 public class ExceptionController {
 
-    private Logger logger = Logger.getRootLogger();
+    private Logger logger = Logger
+            .getLogger(ExceptionController.class);
+
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public String noHandler(Exception exception) {
 
-        logger.warn(exception);
+        logger.error(exception);
         return "error/handler";
     }
+
 
     @ExceptionHandler(JDBCConnectionException.class)
     public String noConnection(Exception exception) {
 
         logger.warn(exception);
         return "error/connection";
+    }
+
+
+    @ExceptionHandler(SQLGrammarException.class)
+    public String sqlGrammar(Exception exception) {
+
+        logger.error(exception);
+        return "error/sql";
     }
 }
