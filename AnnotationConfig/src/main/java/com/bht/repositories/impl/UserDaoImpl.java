@@ -1,15 +1,17 @@
 package com.bht.repositories.impl;
 
-import com.bht.models.User;
+import com.bht.entities.User;
 import com.bht.repositories.UserDao;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -17,29 +19,26 @@ import java.util.List;
 @Transactional
 public class UserDaoImpl implements UserDao {
 
+    /*@Autowired
+    JdbcTemplate jdbcTemplate;*/
+
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    SessionFactory sessionFactory;
 
 
     @Override
     public int nextIdValue() {
-        return jdbcTemplate.queryForObject(
-                "SELECT IDENT_CURRENT('[User]') + 1",
-                Integer.class
-        );
+        String sql = "SELECT IDENT_CURRENT('Client') + 1 AS id";
+        List results = sessionFactory.getCurrentSession()
+                .createSQLQuery(sql).list();
+
+        return ((BigDecimal) results.get(0)).intValue();
     }
 
     @Override
     public boolean addUser(User user) {
-
-        String sql = "INSERT INTO [User](username, password, email, gender, hasAvatar) VALUES(?,?,?,?,?)";
-
-        jdbcTemplate.update(sql,
-                user.getUsername(),
-                user.getPassword(),
-                user.getEmail(),
-                user.getGender(),
-                user.getHasAvatar());
+        sessionFactory.getCurrentSession()
+                .save(user);
 
         return true;
     }
@@ -47,22 +46,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean updateUser(User user) {
-
-        String sql = "UPDATE [User] SET " +
-                "username = ? , " +
-                "password = ? , " +
-                "email = ? , " +
-                "gender = ? , " +
-                "hasAvatar = ? " +
-                "WHERE id = ? ";
-
-        jdbcTemplate.update(sql,
-                user.getUsername(),
-                user.getPassword(),
-                user.getEmail(),
-                user.getGender(),
-                user.getHasAvatar(),
-                user.getId());
+        sessionFactory.getCurrentSession()
+                .merge(user);
 
         return true;
     }
@@ -70,10 +55,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean deleteUser(int id) {
-
-        String sql = "DELETE FROM [User] WHERE id = ?";
-
-        jdbcTemplate.update(sql, id);
+        sessionFactory.getCurrentSession()
+                .delete(getUserById(id));
 
         return true;
     }
@@ -81,44 +64,20 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserById(int id) {
-
-        String sql = "SELECT * FROM [User] WHERE id = ?";
-
-        return jdbcTemplate.queryForObject(
-                sql,                // sql statement
-                new Object[]{id},   // according to ? in sql
-                new UserRowMapper() // RowMapper for User (implements RowMapper<User>)
-        );
+        return sessionFactory.getCurrentSession()
+                .get(User.class, id);
     }
 
 
     @Override
     public List<User> getAllUsers() {
+        CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
 
-        String sql = "SELECT * FROM [User] ";
+        Root<User> root = query.from(User.class);
+        TypedQuery<User> allQuery = sessionFactory.getCurrentSession()
+                .createQuery(query.select(root));
 
-        return jdbcTemplate.query(
-                sql,                // sql statement
-                new Object[]{},     // according to ? in sql
-                new UserRowMapper() // RowMapper for User (implements RowMapper<User>)
-        );
-    }
-
-
-    public class UserRowMapper implements RowMapper<User> {
-
-        @Override
-        public User mapRow(ResultSet resultSet, int i) throws SQLException {
-            User user = new User();
-
-            user.setId(resultSet.getInt("id"));
-            user.setUsername(resultSet.getString("username"));
-            user.setPassword(resultSet.getString("password"));
-            user.setEmail(resultSet.getString("email"));
-            user.setGender(resultSet.getBoolean("gender"));
-            user.setHasAvatar(resultSet.getBoolean("hasAvatar"));
-
-            return user;
-        }
+        return allQuery.getResultList();
     }
 }

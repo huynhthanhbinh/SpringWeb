@@ -1,6 +1,11 @@
 package com.bht.repositories;
 
-import com.bht.models.User;
+// Use entity User instead of model User
+// Remind: entity User != model User
+//  + User Model  : for presentation layer (view)
+//  + User Entity : for data access layer (repo)
+
+import com.bht.entities.User;
 
 import java.util.List;
 

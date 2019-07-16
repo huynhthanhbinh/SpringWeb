@@ -1,5 +1,6 @@
 package com.bht.configurations;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -9,9 +10,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 
 @Configuration
@@ -114,10 +116,10 @@ public class WebConfig implements WebMvcConfigurer {
 
 
     // Template for processing with JDBC Spring
-    @Bean
+    /*@Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
-    }
+    }*/
 
 
     // As Environment obj is in the same class
@@ -130,7 +132,44 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
-    // For handling transaction
+    // Config Session Factory / Hibernate
+    @Bean
+    public LocalSessionFactoryBean sessionFactoryBean() {
+
+        // Session Factory Configure
+        LocalSessionFactoryBean bean =
+                new LocalSessionFactoryBean();
+
+
+        // DataSource as learnt before:
+        // Eg. MSSQL Config, DB: BHT, localhost
+        bean.setDataSource(dataSource());
+
+
+        // Package contains class mapping record to model
+        // eg. com.bht.entities
+        bean.setPackagesToScan("com.bht.entities");
+
+        // Hibernate Properties for hibernate extra config
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.put("hibernate.dialect",
+                environment.getProperty("hibernate.dialect"));
+        hibernateProperties.put("hibernate.show_sql",
+                environment.getProperty("hibernate.show_sql"));
+        hibernateProperties.put("hibernate.connection.pool_size",
+                environment.getProperty("hibernate.connection.pool_size"));
+        hibernateProperties.put("hibernate.connection.autocommit",
+                environment.getProperty("hibernate.connection.autocommit"));
+
+
+        // Assign hibernateProperties to SessionFactory Config
+        bean.setHibernateProperties(hibernateProperties);
+
+        return bean;
+    }
+
+
+    // For handling transactions / connections
     // Spring support @EnableTransactionManagement
     // Transaction use in Service Class, DAO Class
     // not using for Controller !!! meaningless !!
@@ -139,8 +178,20 @@ public class WebConfig implements WebMvcConfigurer {
     // + Transaction for each unit method inside service/DAO
     // We can have multi different bean transaction manager
     // Therefore, we need to declare exactly the bean name
-    @Bean("transactionManager")
+    /*@Bean("transactionManager")
     public DataSourceTransactionManager dataSourceTransactionManager() {
         return new DataSourceTransactionManager(dataSource());
+    }*/
+    @Bean("transactionManager")
+    public HibernateTransactionManager hibernateTransactionManager(
+            @Autowired SessionFactory sessionFactory) {
+
+        HibernateTransactionManager hibernateTransactionManager =
+                new HibernateTransactionManager();
+
+        // Set session factory
+        hibernateTransactionManager.setSessionFactory(sessionFactory);
+
+        return hibernateTransactionManager;
     }
 }

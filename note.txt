@@ -1,3 +1,5 @@
+@author BHT - Huynh Thanh Binh - ELCA VN
+
 0. Create Maven Project as maven-archetype-webapp
     0.0 - Should use IntelliJ Ultimate version
     0.1 - Open IntelliJ
@@ -129,3 +131,41 @@ Remember to add prefix: "classpath:<property_file_name>"
 
 Transaction (TX) using for handling transactions (with db)
 Ensure succeed or roll back (if fail) : data integrity !!!
+
+
+7. HIBERNATE + SPRING MVC
+
+    + Mapping : map from record (row) to model object
+    + ORM Framework - Object Relational Mapping
+    + RDBMS - Relational Database Management System
+    + RDBMS eg. MSSQL, MySQL, PostgreSQL, Oracle
+    + Hibernate is ORM Framework, free-open-source
+    + using core API: JDBC, JTA, JNDI
+    + work with Java, don't mind which DBMS grammar
+    + Support full common queries from object to raw sql
+
+    Model Object --> Persistent Object
+
+    7.1 - Framework Component
+
+        + Configuration    : for configuring
+        + Session Factory  : create connections between app & DBMS
+        + Session          : 1 time connection between app & DBMS
+        + Transaction      : for managing transaction
+        + Query            : for queries eg. HSQL - Hibernate SQL
+        + Criteria         : for queries but use Java Expression/ Statements not SQL
+
+    7.2 - Maven Build Dependencies
+
+        + Spring ORM : for Object Relational Mapping
+        + Hibernate Core : Hibernate Framework
+
+    7.3 - What is JPA ?
+
+        + Java Persistence API
+        + Java ORM for storing, accessing, and managing
+          Java objects in a relational database
+        + It's not a framework !
+
+        Hibernate ORM is one of the most mature JPA implementation
+        Hibernate is still a popular option for ORM in Java

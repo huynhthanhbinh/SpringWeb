@@ -67,6 +67,20 @@
             <version>${springframework.version}</version>
         </dependency>
 
+        <!-- Spring ORM : Object Relational Mapping -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+
+        <!-- Hibernate Framework -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.3.Final</version>
+        </dependency>
+
         <!-- JDBC Driver for MySQL -->
         <dependency>
             <groupId>mysql</groupId>

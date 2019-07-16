@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,31 +33,88 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean addUser(User user) {
+    public boolean addUser(User userDTO) {
+        com.bht.entities.User user = new com.bht.entities.User();
+
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setEmail(userDTO.getEmail());
+        user.setGender(userDTO.getGender());
+        user.setHasAvatar(userDTO.getHasAvatar());
+
         return userDao.addUser(user);
     }
 
 
     @Override
-    public boolean updateUser(User user) {
-        return userDao.updateUser(user);
+    public boolean updateUser(User userDTO) {
+        com.bht.entities.User user =
+                userDao.getUserById(userDTO.getId());
+
+        if (user != null) {
+
+            user.setPassword(userDTO.getPassword());
+            user.setEmail(userDTO.getEmail());
+            user.setGender(userDTO.getGender());
+            user.setHasAvatar(userDTO.getHasAvatar());
+
+            return userDao.updateUser(user);
+        }
+        return false;
     }
 
 
     @Override
     public boolean deleteUser(int id) {
-        return userDao.deleteUser(id);
+        com.bht.entities.User user =
+                userDao.getUserById(id);
+
+        if (user != null) {
+            return userDao.deleteUser(id);
+        }
+        return false;
     }
 
 
     @Override
     public User getUserById(int id) {
-        return userDao.getUserById(id);
+        com.bht.entities.User user =
+                userDao.getUserById(id);
+
+        if (user != null) {
+            User userDTO = new User();
+
+            userDTO.setId(user.getId());
+            userDTO.setUsername(user.getUsername());
+            userDTO.setPassword(user.getPassword());
+            userDTO.setEmail(user.getEmail());
+            userDTO.setGender(user.getGender());
+            userDTO.setHasAvatar(user.getHasAvatar());
+
+            return userDTO;
+        }
+        return null;
     }
 
 
     @Override
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        List<com.bht.entities.User> users = userDao.getAllUsers();
+        List<User> usersDTO = new ArrayList<>();
+
+        for (com.bht.entities.User user : users) {
+            User userDTO = new User();
+
+            userDTO.setId(user.getId());
+            userDTO.setUsername(user.getUsername());
+            userDTO.setPassword(user.getPassword());
+            userDTO.setEmail(user.getEmail());
+            userDTO.setGender(user.getGender());
+            userDTO.setHasAvatar(user.getHasAvatar());
+
+            usersDTO.add(userDTO);
+        }
+
+        return usersDTO;
     }
 }
