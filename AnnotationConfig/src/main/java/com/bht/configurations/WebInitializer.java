@@ -20,10 +20,18 @@ public class WebInitializer implements WebApplicationInitializer {
         context.setServletContext(servletContext);
 
 
+        // new a dispatcherServlet, throw NoHandlerFoundException
+        // exception occur when user go to
+        // a link not handle / support in controllers
+        DispatcherServlet dispatcherServlet =
+                new DispatcherServlet(context);
+
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
+
+
         // Servlet Dispatcher using for Spring MVC model
         ServletRegistration.Dynamic servlet = servletContext
-                .addServlet("dispatcher",
-                        new DispatcherServlet(context));
+                .addServlet("dispatcher", dispatcherServlet);
 
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
