@@ -1,5 +1,7 @@
 package com.bht.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -9,39 +11,53 @@ public class User {
     // is configure inside messages.properties !
     // Not throw warning in the object class / model file !
 
+
+    // Annotation limit the min of the field
+    //@Min(1)
+    @JsonProperty("id")
+    private int id;
+
+
     // Annotation check the field is not empty
     //@NotEmpty
+    @JsonProperty("username")
     private String username;
 
     // Annotation limit the max and min of the field
     //@Length(min = 6, max = 20)
+    @JsonProperty("password")
     private String password;
 
-    // Annotation limit the min of the field
-    //@Min(1)
-    private int id;
 
     // Annotation check if the input String is in correct email format
     //@Email
+    @JsonProperty("email")
     private String email;
 
 
     // create an empty-list of hobbies
+    @JsonProperty("hobbies")
     private List<String> hobbies;
 
 
     // Gender of user: male or female
+    @JsonProperty("gender")
     private boolean gender;
 
 
     // Avatar path
+    @JsonProperty("hasAvatar")
     private boolean hasAvatar;
+
+
+    @JsonProperty("avatarPath")
     private String avatarPath;
 
 
     // a boolean value to store if user accept the agreement or not !
     // check if user accept the page's aggreement !
     //@AssertTrue
+    @JsonProperty("acceptAgreement")
     private boolean acceptAgreement;
 
 

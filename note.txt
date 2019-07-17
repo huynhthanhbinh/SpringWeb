@@ -204,3 +204,37 @@ Ensure succeed or roll back (if fail) : data integrity !!!
         + Line  – Line number in java class.
         + Message – The message logged.
         + Default line separator
+
+9. Restful - SPRING REST
+
+    9.1 - What is RESTful ? RESTful Web Services
+
+        CRUD --> Create - Read - Update - Delete
+        That's 4 actions to do with a resources online
+        Every resources online have to deal with CRUD!
+        Therefore, a standard has been created:
+
+        Create --> HttpRequestMethod = POST
+        Read   --> HttpRequestMethod = GET
+        Update --> HttpRequestMethod = PUT
+        Delete --> HttpRequestMethod = DELETE
+
+        we called it REST Architecture
+        Aim to help every website to manage resources
+        REST/ReST --> Representational State Transfer
+        RESTful (adj) 'cause -ful is suffix eg. helpful
+
+    9.2 - REST use for making web service as mentioned
+
+        Supported return many formats eg. JSON, XML,...
+        Easy to configure and use
+        Require some dependencies to convert to JSON, XML
+
+    9.3 - Using POSTMAN (for eg.)
+
+        Set method: GET
+        Set Headers:
+            Key:   Accept
+            Value: application/json
+
+        SEND

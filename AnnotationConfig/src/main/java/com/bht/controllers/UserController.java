@@ -6,6 +6,7 @@ import com.bht.validators.UserValidator;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -72,10 +73,10 @@ public class UserController {
 
     // URL : /bht/user/add, request method: POST
     @PostMapping("/add")
-    public String viewUser(HttpServletRequest request,
-                           @ModelAttribute("user") User user,
-                           @RequestParam("fileUpload") MultipartFile file,
-                           BindingResult bindingResult) {
+    public String addUser(HttpServletRequest request,
+                          @ModelAttribute("user") User user,
+                          @RequestParam("fileUpload") MultipartFile file,
+                          BindingResult bindingResult) {
 
         // Using customized-validator
         // 1st argument: object to check error
@@ -144,9 +145,20 @@ public class UserController {
     }
 
 
+    // URL : /user/add, request method: POST
+    // Code created means created successfully !
+    // REST with POST example, @RequestBody is JSON
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void registerUser(@RequestBody User user) {
+
+        userService.addUser(user);
+    }
+
+
     // Get List of users
     @GetMapping("/list")
-    public String getAllUser(HttpServletRequest request) {
+    public String getListUser(HttpServletRequest request) {
 
         // Get UserList from UserService
         // UserService will call UserDao
@@ -161,6 +173,16 @@ public class UserController {
     }
 
 
+    // Get List of users by Spring REST @RequestBody @ResponseBody
+    @GetMapping("/all")
+    public @ResponseBody
+    List<User> userList(HttpServletRequest request) {
+
+        // Return a list of User not a view
+        return userService.getAllUsers();
+    }
+
+
     // View info of a specific user
     @GetMapping("/{userId}")
     public String getUser(HttpServletRequest request,
@@ -171,6 +193,17 @@ public class UserController {
         // then request is sent to ViewSolver with logical view name
         request.setAttribute("user", userService.getUserById(id));
         return "user/view";
+    }
+
+
+    // Get user by ID by Spring REST @RequestBody @ResponseBody
+    @GetMapping("/{userId}/info")
+    public @ResponseBody
+    User user(HttpServletRequest request,
+              @PathVariable("userId") int id) {
+
+        // Return a User not a view
+        return userService.getUserById(id);
     }
 
 
